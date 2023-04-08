@@ -4,8 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ComparisonWindow" Height="450" Width="800" Icon="/earth_icon.png">
-    <Grid>
-        
+        Title="Country Comparison" Height="650" Width="950" Icon="/earth_icon.png">
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" x:Name="countryGrid">
+            <!-- Countries will be added dynamically here -->
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button Click="BackButton_Click" Content="Go back" Margin="10 0 10 10" Padding="5"></Button>
+        </Grid>
     </Grid>
 </Window>

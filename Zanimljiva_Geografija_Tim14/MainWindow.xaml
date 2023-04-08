@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Geography" Height="450" Width="800" Icon="/earth_icon.png">
+        Title="Geography" Height="650" Width="950" Icon="/earth_icon.png">
     <Grid ShowGridLines="True"> <!-- Izbaci kada budes ustanovio dobar ratio prozora-->
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"> <!-- Tu je Markov deo -->
@@ -24,7 +24,7 @@
             <ColumnDefinition>
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="2" Margin="15" Click="Button_Click">
+        <Button x:Name="compareButton" Grid.Row="0" Grid.Column="2" Margin="15" Click="Button_Click" IsEnabled="False">
             Compare countries
         </Button>
 

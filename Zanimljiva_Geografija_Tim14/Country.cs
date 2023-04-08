@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Zanimljiva_Geografija_Tim14
@@ -22,13 +23,13 @@ namespace Zanimljiva_Geografija_Tim14
         public int Population { get; set; }
 
         [JsonProperty("flags")]
-        public Dictionary<string, object> Flag { get; set; }
+        public Dictionary<string, string> Flag { get; set; }
 
         [JsonProperty("coatOfArms")]
         public Dictionary<string, string> CoatOfArms { get; set; }
 
         [JsonProperty("currencies")]
-        public Dictionary<string, Dictionary<string, string>> Currencies { get; set; }
+        public Dictionary<string, Dictionary<string, string>> CurrenciesDictionary { get; set; }
 
         [JsonProperty("maps")]
         public Dictionary<string, string> Maps { get; set; }
@@ -50,12 +51,23 @@ namespace Zanimljiva_Geografija_Tim14
 
         public List<string> Languages => LanguagesDictionary.Values.ToList();
 
+        public List<string> GetAllCurrencies()
+        {
+            List<string> currencies = new List<string>();
+            foreach (Dictionary<string, string> dict in CurrenciesDictionary.Values)
+            {
+                currencies.Add($"{dict["name"]} ({dict["symbol"]})");
+            }
+
+            return currencies;
+        }
+
         public Country()
         {
 
         }
 
-        public Country(Dictionary<string, object> name, List<string> capitals, string region, string subRegion, int population, Dictionary<string, object> flag, Dictionary<string, string> coatOfArms, Dictionary<string, Dictionary<string, string>> currencies, Dictionary<string, string> maps, List<string> continents, decimal[] latLng, Dictionary<string, string> languagesDictionary)
+        public Country(Dictionary<string, object> name, List<string> capitals, string region, string subRegion, int population, Dictionary<string, string> flag, Dictionary<string, string> coatOfArms, Dictionary<string, Dictionary<string, string>> currenciesDictionary, Dictionary<string, string> maps, List<string> continents, decimal[] latLng, Dictionary<string, string> languagesDictionary)
         {
             NameDictionary = name;
             Capitals = capitals;
@@ -64,7 +76,7 @@ namespace Zanimljiva_Geografija_Tim14
             Population = population;
             Flag = flag;
             CoatOfArms = coatOfArms;
-            Currencies = currencies;
+            CurrenciesDictionary = currenciesDictionary;
             Maps = maps;
             Continents = continents;
             LatLng = latLng;

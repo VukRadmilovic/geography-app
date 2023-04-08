@@ -26,6 +26,7 @@ namespace Zanimljiva_Geografija_Tim14
             try
             {
                 _countries = new ObservableCollection<Country>(await _service.GetCountriesAsync());
+                compareButton.IsEnabled = true;
             }
             catch (Exception ex)
             {
