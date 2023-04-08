@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +31,14 @@ namespace Zanimljiva_Geografija_Tim14
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new ComparisonWindow(new List<Country>() { _countries[0], _countries[1] });
+            Hide();
+            window.ShowDialog();
+            Show();
         }
     }
 }

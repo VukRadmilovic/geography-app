@@ -24,6 +24,9 @@
             <ColumnDefinition>
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.Column="2" Margin="15" Click="Button_Click">
+            Compare countries
+        </Button>
 
         <Grid Grid.Row="1"  Grid.Column="0">
             <Grid.RowDefinitions>

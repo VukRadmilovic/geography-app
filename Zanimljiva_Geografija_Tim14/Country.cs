@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Zanimljiva_Geografija_Tim14
 {
-    internal class Country
+    public class Country
     {
         [JsonProperty("name")]
         public Dictionary<string, object> NameDictionary { get; set; }
