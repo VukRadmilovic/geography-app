@@ -1,0 +1,18 @@
+﻿<Window x:Class="Zanimljiva_Geografija_Tim14.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Zanimljiva geografija" Height="450" Width="800" Icon="/earth_icon.png">
+    <Grid ShowGridLines="True"> <!-- Izbaci kada budes ustanovio dobar ratio prozora-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"> <!-- Tu je Markov deo -->
+            </RowDefinition>
+            
+            <RowDefinition Height="6*"> <!--Tu je prikaz drzave pojedinacno-->   
+                
+            </RowDefinition>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

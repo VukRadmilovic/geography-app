@@ -1,0 +1,15 @@
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\bin\Debug\Zanimljiva_Geografija_Tim14.exe.config
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\bin\Debug\Zanimljiva_Geografija_Tim14.exe
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\bin\Debug\Zanimljiva_Geografija_Tim14.pdb
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.csproj.AssemblyReference.cache
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.csproj.SuggestedBindingRedirects.cache
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\MainWindow.g.cs
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\App.g.cs
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14_MarkupCompile.cache
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\MainWindow.baml
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.g.resources
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.Properties.Resources.resources
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.csproj.GenerateResource.cache
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.csproj.CoreCompileInputs.cache
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.exe
+C:\Users\Dracooya\Desktop\Fax\3. godina\6. semestar\Interakcija čovek računar\Mali projekat\hci-1-tim14\Zanimljiva_Geografija_Tim14\Zanimljiva_Geografija_Tim14\obj\Debug\Zanimljiva_Geografija_Tim14.pdb
