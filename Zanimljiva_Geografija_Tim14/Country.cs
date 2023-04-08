@@ -1,41 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Documents;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Zanimljiva_Geografija_Tim14
 {
     internal class Country
     {
-        public string Name { get; set; }
+        [JsonProperty("name")]
+        public Dictionary<string, object> NameDictionary { get; set; }
+
+        [JsonProperty("capital")]
         public List<string> Capitals { get; set; }
-        public List<string> Currencies { get; set; }
+
+        [JsonProperty("region")]
         public string Region { get; set; }
+
+        [JsonProperty("subregion")]
         public string SubRegion { get; set; }
+
+        [JsonProperty("population")]
         public int Population { get; set; }
-        public List<string> Continents { get; set; }
-        public Dictionary<string, string> Maps { get; set; }
-        public decimal[] LatLng { get; set; } 
-        public Dictionary<string, string> Flag { get; set; }
+
+        [JsonProperty("flags")]
+        public Dictionary<string, object> Flag { get; set; }
+
+        [JsonProperty("coatOfArms")]
         public Dictionary<string, string> CoatOfArms { get; set; }
+
+        [JsonProperty("currencies")]
+        public Dictionary<string, Dictionary<string, string>> Currencies { get; set; }
+
+        [JsonProperty("maps")]
+        public Dictionary<string, string> Maps { get; set; }
+
+        [JsonProperty("continents")]
+        public List<string> Continents { get; set; }
+
+        [JsonProperty("latlng")]
+        public decimal[] LatLng { get; set; }
+
+        [JsonProperty("languages")]
+        public Dictionary<string, string> LanguagesDictionary { get; set; }
+
+        public string OfficialName
+        {
+            get => (string)NameDictionary["official"];
+            set => NameDictionary["official"] = value;
+        }
+
+        public List<string> Languages => LanguagesDictionary.Values.ToList();
 
         public Country()
         {
 
         }
 
-        public Country(string name, List<string> capitals, List<string> currencies, string region, string subRegion, int population, List<string> continents, Dictionary<string, string> maps, decimal[] latLng, Dictionary<string, string> flag, Dictionary<string, string> coatOfArms)
+        public Country(Dictionary<string, object> name, List<string> capitals, string region, string subRegion, int population, Dictionary<string, object> flag, Dictionary<string, string> coatOfArms, Dictionary<string, Dictionary<string, string>> currencies, Dictionary<string, string> maps, List<string> continents, decimal[] latLng, Dictionary<string, string> languagesDictionary)
         {
-            Name = name;
+            NameDictionary = name;
             Capitals = capitals;
-            Currencies = currencies;
             Region = region;
             SubRegion = subRegion;
             Population = population;
-            Continents = continents;
-            Maps = maps;
-            LatLng = latLng;
             Flag = flag;
             CoatOfArms = coatOfArms;
+            Currencies = currencies;
+            Maps = maps;
+            Continents = continents;
+            LatLng = latLng;
+            LanguagesDictionary = languagesDictionary;
         }
     }
 }
