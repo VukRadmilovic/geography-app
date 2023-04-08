@@ -10,20 +10,26 @@ namespace Zanimljiva_Geografija_Tim14
     /// </summary>
     public partial class MainWindow : Window
     {
-        public String Value = "50000000";
-        private Collection<Country> countries;
-        private CountryService service;
+        private Collection<Country> _countries;
+        private readonly CountryService _service;
 
         public MainWindow()
         {
             InitializeComponent();
-            service = new CountryService();
+            _service = new CountryService();
             _ = LoadCountriesAsync();
         }
 
         public async Task LoadCountriesAsync()
         {
-            countries = new ObservableCollection<Country>(await service.GetCountriesAsync());
+            try
+            {
+                _countries = new ObservableCollection<Country>(await _service.GetCountriesAsync());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

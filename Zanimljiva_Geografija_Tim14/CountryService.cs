@@ -8,12 +8,12 @@ namespace Zanimljiva_Geografija_Tim14
 {
     internal class CountryService
     {
-        private readonly string apiUrl = "https://restcountries.com/v3.1/independent?status=true&fields=name,currencies,capital,region,subregion,languages,latlng,continents,population,flags,maps,coatOfArms";
+        private const string ApiUrl = "https://restcountries.com/v3.1/independent?status=true&fields=name,currencies,capital,region,subregion,languages,latlng,continents,population,flags,maps,coatOfArms";
 
         public async Task<List<Country>> GetCountriesAsync()
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(apiUrl);
+            HttpResponseMessage response = await client.GetAsync(ApiUrl);
 
             if (!response.IsSuccessStatusCode)
             {
