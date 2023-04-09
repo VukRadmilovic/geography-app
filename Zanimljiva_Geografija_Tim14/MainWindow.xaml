@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ns="clr-namespace:Zanimljiva_Geografija_Tim14"
         mc:Ignorable="d"
         Style="{StaticResource RobotoFont}"
         Title="Geography" Height="650" Width="950" Icon="/earth_icon.png">
@@ -37,7 +38,7 @@
         <Viewbox Grid.Row="3" Grid.ColumnSpan="3">
             <Button x:Name="button_map" Margin="0 10" Padding="20 5" BorderBrush="#87d1ee" Background="#87d1ee" Style="{StaticResource btnRound}" Click="button_map_Click" FontWeight="Bold">See map</Button>
         </Viewbox>
-        <WebBrowser x:Name="map_window" Panel.ZIndex="1" Grid.Row="2" Visibility="Hidden" Grid.ColumnSpan="3" Source="https://goo.gl/maps/q42Qbf1BmQL3fuZg9"></WebBrowser>
+        <WebBrowser x:Name="map_window" Panel.ZIndex="1" Grid.Row="2" Visibility="Hidden" Grid.ColumnSpan="3"  ns:WebBrowserUtility.BindableSource="{Binding Maps[googleMaps]}"></WebBrowser>
 
         <Grid Grid.Row="2"  Grid.Column="0">
             <Grid.RowDefinitions>
@@ -50,27 +51,27 @@
             <Viewbox Grid.Row="0" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Name:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">United States of America</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding OfficialName}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
             <Viewbox Grid.Row="1" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Capital:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">Washington</TextBlock>
+                    <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Capitals:</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding CapitalsProperty}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
             
             <Viewbox Grid.Row="2" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Continent:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">North America</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding Continents[0]}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
             <Viewbox Grid.Row="3" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Population:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center"  MaxWidth="300" TextWrapping="Wrap">10,123,455</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center"  MaxWidth="300" TextWrapping="Wrap" Text="{Binding Population, StringFormat='{}{0:0,0}'}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
             
@@ -88,27 +89,27 @@
             <Viewbox Grid.Row="0" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Region:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">Americas</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding Region}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
             <Viewbox Grid.Row="1" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Subregion:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">North America</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding SubRegion}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
             <Viewbox Grid.Row="2" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Latitude:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">38</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding LatLng[0]}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
             <Viewbox Grid.Row="3" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Longtitude:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center"  MaxWidth="300" TextWrapping="Wrap">-97</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center"  MaxWidth="300" TextWrapping="Wrap" Text="{Binding LatLng[1]}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
@@ -125,14 +126,14 @@
             <Viewbox Grid.Row="0" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontFamily="Roboto" FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Languages:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">English</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding LanguagesProperty}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
      
             <Viewbox Grid.Row="1" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
                 <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Currencies:</TextBlock>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap">United States dollar ($)</TextBlock>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding CurrenciesProperty}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
@@ -147,19 +148,17 @@
                 <Viewbox Grid.Column="0" Margin="15 10" VerticalAlignment="Top">
                     <WrapPanel VerticalAlignment="Top" Orientation="Vertical">
                         <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 0 15" HorizontalAlignment="Center">Flag:</TextBlock>
-                        <Image Source="https://flagcdn.com/w320/us.png" MaxHeight="100" HorizontalAlignment="Center"></Image>
+                        <Image Source="{Binding Flag[png]}" MaxHeight="100" HorizontalAlignment="Center"></Image>
                     </WrapPanel>
                 </Viewbox>
 
                 <Viewbox Grid.Column="1" Margin="15 10" VerticalAlignment="Top">
                     <WrapPanel VerticalAlignment="Top" Orientation="Vertical">
                         <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 0 15" HorizontalAlignment="Center">Coat of arms:</TextBlock>
-                        <Image Source="https://mainfacts.com/media/images/coats_of_arms/us.png" MaxWidth="150"></Image>
+                        <Image Source="{Binding CoatOfArms[png]}" MaxWidth="150"></Image>
                     </WrapPanel>
                 </Viewbox>
             </Grid>
-            
-
         </Grid>
     </Grid>
 </Window>
