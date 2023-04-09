@@ -48,28 +48,28 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Viewbox Grid.Row="0" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="0" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Name:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding OfficialName}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
-            <Viewbox Grid.Row="1" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="1" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Capitals:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding CapitalsProperty}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
             
-            <Viewbox Grid.Row="2" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="2" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Continent:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding Continents[0]}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
-            <Viewbox Grid.Row="3" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="3" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Population:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center"  MaxWidth="300" TextWrapping="Wrap" Text="{Binding Population, StringFormat='{}{0:0,0}'}"></TextBlock>
                 </WrapPanel>
@@ -86,28 +86,28 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Viewbox Grid.Row="0" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="0" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Region:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding Region}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
-            <Viewbox Grid.Row="1" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="1" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Subregion:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding SubRegion}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
-            <Viewbox Grid.Row="2" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="2" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Latitude:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding LatLng[0]}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
 
-            <Viewbox Grid.Row="3" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="3" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Longtitude:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center"  MaxWidth="300" TextWrapping="Wrap" Text="{Binding LatLng[1]}"></TextBlock>
                 </WrapPanel>
@@ -123,15 +123,15 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Viewbox Grid.Row="0" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="0" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontFamily="Roboto" FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Languages:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding LanguagesProperty}"></TextBlock>
                 </WrapPanel>
             </Viewbox>
      
-            <Viewbox Grid.Row="1" Margin="15 0" StretchDirection="DownOnly" HorizontalAlignment="Left">
-                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Viewbox Grid.Row="1" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="15 10">
                     <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 10 0" VerticalAlignment="Center">Currencies:</TextBlock>
                     <TextBlock FontSize="20" VerticalAlignment="Center" MaxWidth="400" TextWrapping="Wrap" Text="{Binding CurrenciesProperty}"></TextBlock>
                 </WrapPanel>

@@ -60,6 +60,11 @@ namespace Zanimljiva_Geografija_Tim14
             get => string.Join(", ", GetAllCurrencies());
         }
 
+        public string CapitalsProperty
+        {
+            get => string.Join(", ", Capitals);
+        }
+
         public List<string> GetAllCurrencies()
         {
             List<string> currencies = new List<string>();

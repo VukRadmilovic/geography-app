@@ -29,7 +29,15 @@ namespace Zanimljiva_Geografija_Tim14
             try
             {
                 _countries = new ObservableCollection<Country>(await _service.GetCountriesAsync());
-                chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
+                foreach (Country country in _countries)
+                {
+                    if (country.NameDictionary["official"].Equals("Republic of Zimbabwe"))
+                    {
+                        chosenCountry = country;
+                        break;
+                    }
+                }
+                //chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
                 DataContext = chosenCountry;
                 compareButton.IsEnabled = true;
             }
