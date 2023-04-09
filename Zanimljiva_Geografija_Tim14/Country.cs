@@ -50,6 +50,15 @@ namespace Zanimljiva_Geografija_Tim14
         }
 
         public List<string> Languages => LanguagesDictionary.Values.ToList();
+        public string LanguagesProperty
+        {
+            get => string.Join(", ", Languages);
+        }
+
+        public string CurrenciesProperty
+        {
+            get => string.Join(", ", GetAllCurrencies());
+        }
 
         public List<string> GetAllCurrencies()
         {

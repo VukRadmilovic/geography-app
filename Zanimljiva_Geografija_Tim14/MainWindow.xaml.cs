@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Zanimljiva_Geografija_Tim14
 {
@@ -14,12 +15,14 @@ namespace Zanimljiva_Geografija_Tim14
     {
         private Collection<Country> _countries;
         private readonly CountryService _service;
+        private Country chosenCountry;
 
         public MainWindow()
         {
             InitializeComponent();
             _service = new CountryService();
             _ = LoadCountriesAsync();
+            
         }
 
         public async Task LoadCountriesAsync()
@@ -27,6 +30,8 @@ namespace Zanimljiva_Geografija_Tim14
             try
             {
                 _countries = new ObservableCollection<Country>(await _service.GetCountriesAsync());
+                chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
+                DataContext = chosenCountry;
                 compareButton.IsEnabled = true;
             }
             catch (Exception ex)
@@ -42,6 +47,18 @@ namespace Zanimljiva_Geografija_Tim14
             Hide();
             window.ShowDialog();
             Show();
+        }
+
+        private void button_map_Click(object sender, RoutedEventArgs e)
+        {
+            if(map_window.Visibility == Visibility.Visible)
+            {
+                map_window.Visibility = Visibility.Hidden;
+                button_map.Content = "See map";
+                return;
+            }
+            button_map.Content = "See info";
+            map_window.Visibility = Visibility.Visible;
         }
     }
 }

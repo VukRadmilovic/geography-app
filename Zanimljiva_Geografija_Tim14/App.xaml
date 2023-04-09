@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:Zanimljiva_Geografija_Tim14"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="RobotoFont" TargetType="{x:Type Control}">
+            <Setter Property="FontFamily" Value="Roboto" />
+            <Setter Property="FontWeight" Value="Thin" />
+        </Style>
+        
+        <Style x:Key="btnRound" TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        
     </Application.Resources>
 </Application>
