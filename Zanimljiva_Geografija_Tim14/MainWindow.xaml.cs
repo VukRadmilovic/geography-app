@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -49,7 +50,8 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ComparisonWindow(new List<Country>() { _countries[0], _countries[1] });
+            Random random = new Random();
+            var window = new ComparisonWindow(new List<Country>(_countries.OrderBy(x => random.Next()).Take(3)));
             Hide();
             window.ShowDialog();
             Show();
