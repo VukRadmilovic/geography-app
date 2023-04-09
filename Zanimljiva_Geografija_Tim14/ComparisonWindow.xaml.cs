@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Newtonsoft.Json;
 
 namespace Zanimljiva_Geografija_Tim14
 {
@@ -14,7 +12,8 @@ namespace Zanimljiva_Geografija_Tim14
     /// </summary>
     public partial class ComparisonWindow : Window
     {
-        private List<Country> _countries;
+        private readonly List<TextBlock> _scalableTextBlocks = new List<TextBlock>();
+        private readonly int _countryCount;
 
         public ComparisonWindow()
         {
@@ -24,12 +23,37 @@ namespace Zanimljiva_Geografija_Tim14
         public ComparisonWindow(List<Country> countries)
         {
             InitializeComponent();
-            _countries = countries;
+            FontSize = 18;
 
-            PopulateGrid(countries, countries.Count);
+            _countryCount = countries.Count;
+            PopulateGrid(countries);
+
+            SizeChanged += ComparisonWindow_SizeChanged;
+            ScaleTextBoxes();
         }
 
-        private void PopulateGrid(List<Country> countries, int numColumns)
+        private void ComparisonWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ScaleTextBoxes();
+        }
+
+        private void ScaleTextBoxes()
+        {
+            foreach (TextBlock textBlock in _scalableTextBlocks)
+            {
+                textBlock.MaxWidth = ActualWidth / _countryCount;
+            }
+        }
+
+        private Viewbox CreateLabel(string text)
+        {
+            Viewbox viewbox = new Viewbox() { Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Left };
+            TextBlock textBlock = new TextBlock() { Text = text, FontWeight = FontWeights.Bold };
+            viewbox.Child = textBlock;
+            return viewbox;
+        }
+
+        private void PopulateGrid(List<Country> countries)
         {
             countryGrid.Children.Clear();
             countryGrid.RowDefinitions.Clear();
@@ -37,7 +61,7 @@ namespace Zanimljiva_Geografija_Tim14
 
             countryGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            for (int i = 0; i < numColumns; i++)
+            for (int i = 0; i < _countryCount; i++)
             {
                 countryGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
             }
@@ -48,68 +72,24 @@ namespace Zanimljiva_Geografija_Tim14
                 countryGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             }
 
+            Viewbox holder = new Viewbox() { Stretch = Stretch.Uniform };
+            countryGrid.Children.Add(holder);
+            Grid.SetRow(holder, 0);
+            Grid.SetRowSpan(holder, numRows);
+            Grid.SetColumn(holder, 0);
+            Grid.SetColumnSpan(holder, _countryCount);
+
+            string[] labels = { "Name", "Flag", "Coat of arms", "Capitals", "Languages", "Currencies", "Region", "Sub-region", "Continents", "Population", "Latitude", "Longitude" };
             int row = 0;
             int col = 0;
 
-            TextBlock nameLabel = new TextBlock() { Text = "Name:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center};
-            countryGrid.Children.Add(nameLabel);
-            Grid.SetRow(nameLabel, row++);
-            Grid.SetColumn(nameLabel, col);
-
-            TextBlock flagLabel = new TextBlock() { Text = "Flag:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(flagLabel);
-            Grid.SetRow(flagLabel, row++);
-            Grid.SetColumn(flagLabel, col);
-
-            TextBlock coatOfArmsLabel = new TextBlock() { Text = "Coat of arms:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(coatOfArmsLabel);
-            Grid.SetRow(coatOfArmsLabel, row++);
-            Grid.SetColumn(coatOfArmsLabel, col);
-
-            TextBlock capitalsLabel = new TextBlock() { Text = "Capitals:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(capitalsLabel);
-            Grid.SetRow(capitalsLabel, row++);
-            Grid.SetColumn(capitalsLabel, col);
-
-            TextBlock currenciesLabel = new TextBlock() { Text = "Currencies:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(currenciesLabel);
-            Grid.SetRow(currenciesLabel, row++);
-            Grid.SetColumn(currenciesLabel, col);
-
-            TextBlock regionLabel = new TextBlock() { Text = "Region:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(regionLabel);
-            Grid.SetRow(regionLabel, row++);
-            Grid.SetColumn(regionLabel, col);
-
-            TextBlock subRegionLabel = new TextBlock() { Text = "Sub-region:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(subRegionLabel);
-            Grid.SetRow(subRegionLabel, row++);
-            Grid.SetColumn(subRegionLabel, col);
-
-            TextBlock languagesLabel = new TextBlock() { Text = "Languages:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(languagesLabel);
-            Grid.SetRow(languagesLabel, row++);
-            Grid.SetColumn(languagesLabel, col);
-
-            TextBlock latLabel = new TextBlock() { Text = "Latitude:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(latLabel);
-            Grid.SetRow(latLabel, row++);
-            Grid.SetColumn(latLabel, col);
-
-            TextBlock lngLabel = new TextBlock() { Text = "Longitude:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(lngLabel);
-            Grid.SetRow(lngLabel, row++);
-            Grid.SetColumn(lngLabel, col);
-
-            TextBlock continentsLabel = new TextBlock() { Text = "Continents:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(continentsLabel);
-            Grid.SetRow(continentsLabel, row++);
-            Grid.SetColumn(continentsLabel, col);
-
-            TextBlock populationLabel = new TextBlock() { Text = "Population:", FontWeight = FontWeights.Bold, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            countryGrid.Children.Add(populationLabel);
-            Grid.SetRow(populationLabel, row++);
-            Grid.SetColumn(populationLabel, col);
+            foreach (string label in labels)
+            {
+                Viewbox textBlock = CreateLabel(label + ":");
+                countryGrid.Children.Add(textBlock);
+                Grid.SetRow(textBlock, row++);
+                Grid.SetColumn(textBlock, col);
+            }
 
             foreach (Country c in countries)
             {
@@ -117,11 +97,13 @@ namespace Zanimljiva_Geografija_Tim14
                 col++;
 
                 TextBlock name = new TextBlock() { Text = c.OfficialName, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(name);
-                Grid.SetRow(name, row++);
-                Grid.SetColumn(name, col);
+                Viewbox nameViewbox = new Viewbox() { Child = name, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(nameViewbox);
+                Grid.SetRow(nameViewbox, row++);
+                Grid.SetColumn(nameViewbox, col);
+                _scalableTextBlocks.Add(name);
 
-                WrapPanel flagWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 0, 2)};
+                WrapPanel flagWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 0, 5, 2) };
                 var flagImage = new Image();
                 BitmapImage flagBitmap = new BitmapImage();
                 flagBitmap.BeginInit();
@@ -134,7 +116,7 @@ namespace Zanimljiva_Geografija_Tim14
                 Grid.SetRow(flagWrap, row++);
                 Grid.SetColumn(flagWrap, col);
 
-                WrapPanel coatOfArmsWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 2, 0, 0)};
+                WrapPanel coatOfArmsWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 2, 5, 0) };
                 var coatOfArmsImage = new Image();
                 BitmapImage coatOfArmsBitmap = new BitmapImage();
                 coatOfArmsBitmap.BeginInit();
@@ -148,49 +130,101 @@ namespace Zanimljiva_Geografija_Tim14
                 Grid.SetColumn(coatOfArmsWrap, col);
 
                 TextBlock capitals = new TextBlock() { Text = string.Join(", ", c.Capitals), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(capitals);
-                Grid.SetRow(capitals, row++);
-                Grid.SetColumn(capitals, col);
+                Viewbox capitalsViewbox = new Viewbox() { Child = capitals, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(capitalsViewbox);
+                Grid.SetRow(capitalsViewbox, row++);
+                Grid.SetColumn(capitalsViewbox, col);
+                _scalableTextBlocks.Add(capitals);
 
-                TextBlock currencies = new TextBlock() { Text = string.Join(", ", c.GetAllCurrencies()), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(currencies);
-                Grid.SetRow(currencies, row++);
-                Grid.SetColumn(currencies, col);
+                TextBlock languages = new TextBlock()
+                {
+                    Text = string.Join(", ", c.Languages),
+                    TextWrapping = TextWrapping.Wrap,
+                    MaxWidth = 300,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                Viewbox languagesViewbox = new Viewbox()
+                {
+                    Child = languages,
+                    Stretch = Stretch.Uniform,
+                    StretchDirection = StretchDirection.DownOnly,
+                    Margin = new Thickness(0, 0, 5, 0)
+                };
+                countryGrid.Children.Add(languagesViewbox);
+                Grid.SetRow(languagesViewbox, row++);
+                Grid.SetColumn(languagesViewbox, col);
+                _scalableTextBlocks.Add(languages);
+
+                TextBlock currencies = new TextBlock() { 
+                    Text = string.Join(", ", c.GetAllCurrencies()), 
+                    TextWrapping = TextWrapping.Wrap,
+                    MaxWidth = 300,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                Viewbox currenciesViewbox = new Viewbox()
+                {
+                    Child = currencies, 
+                    Stretch = Stretch.Uniform, 
+                    StretchDirection = StretchDirection.DownOnly,
+                    Margin = new Thickness(0, 0, 5, 0)
+                };
+                countryGrid.Children.Add(currenciesViewbox);
+                Grid.SetRow(currenciesViewbox, row++);
+                Grid.SetColumn(currenciesViewbox, col);
+                _scalableTextBlocks.Add(currencies);
 
                 TextBlock region = new TextBlock() { Text = c.Region, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(region);
-                Grid.SetRow(region, row++);
-                Grid.SetColumn(region, col);
+                Viewbox regionViewbox = new Viewbox() { Child = region, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(regionViewbox);
+                Grid.SetRow(regionViewbox, row++);
+                Grid.SetColumn(regionViewbox, col);
+                _scalableTextBlocks.Add(region);
 
                 TextBlock subRegion = new TextBlock() { Text = c.SubRegion, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(subRegion);
-                Grid.SetRow(subRegion, row++);
-                Grid.SetColumn(subRegion, col);
-
-                TextBlock languages = new TextBlock() { Text = string.Join(", ", c.Languages), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(languages);
-                Grid.SetRow(languages, row++);
-                Grid.SetColumn(languages, col);
-
-                TextBlock lat = new TextBlock() { Text = $"{c.LatLng[0]:F}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(lat);
-                Grid.SetRow(lat, row++);
-                Grid.SetColumn(lat, col);
-
-                TextBlock lng = new TextBlock() { Text = $"{c.LatLng[1]:F}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(lng);
-                Grid.SetRow(lng, row++);
-                Grid.SetColumn(lng, col);
+                Viewbox subRegionViewbox = new Viewbox() { Child = subRegion, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(subRegionViewbox);
+                Grid.SetRow(subRegionViewbox, row++);
+                Grid.SetColumn(subRegionViewbox, col);
+                _scalableTextBlocks.Add(subRegion);
 
                 TextBlock continents = new TextBlock() { Text = string.Join(", ", c.Continents), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(continents);
-                Grid.SetRow(continents, row++);
-                Grid.SetColumn(continents, col);
+                Viewbox continentsViewBox = new Viewbox()
+                { Child = continents, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(continentsViewBox);
+                Grid.SetRow(continentsViewBox, row++);
+                Grid.SetColumn(continentsViewBox, col);
+                _scalableTextBlocks.Add(continents);
 
-                TextBlock population = new TextBlock() { Text = $"{c.Population:N}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
-                countryGrid.Children.Add(population);
-                Grid.SetRow(population, row++);
-                Grid.SetColumn(population, col);
+                TextBlock population = new TextBlock() { Text = $"{c.Population:#,##0}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                Viewbox populationViewBox = new Viewbox()
+                {
+                    Child = population,
+                    Stretch = Stretch.Uniform,
+                    StretchDirection = StretchDirection.DownOnly,
+                    Margin = new Thickness(0, 0, 5, 0)
+                };
+                countryGrid.Children.Add(populationViewBox);
+                Grid.SetRow(populationViewBox, row++);
+                Grid.SetColumn(populationViewBox, col);
+                _scalableTextBlocks.Add(population);
+
+                TextBlock lat = new TextBlock() { Text = $"{c.LatLng[0]:F}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                Viewbox latViewBox = new Viewbox()
+                    { Child = lat, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(latViewBox);
+                Grid.SetRow(latViewBox, row++);
+                Grid.SetColumn(latViewBox, col);
+                _scalableTextBlocks.Add(lat);
+
+                TextBlock lng = new TextBlock() { Text = $"{c.LatLng[1]:F}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                Viewbox lngViewBox = new Viewbox()
+                    { Child = lng, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
+                countryGrid.Children.Add(lngViewBox);
+                Grid.SetRow(lngViewBox, row++);
+                Grid.SetColumn(lngViewBox, col);
+                _scalableTextBlocks.Add(lng);
             }
         }
 
