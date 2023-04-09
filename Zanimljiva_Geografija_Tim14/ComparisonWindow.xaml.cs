@@ -48,7 +48,7 @@ namespace Zanimljiva_Geografija_Tim14
         private Viewbox CreateLabel(string text)
         {
             Viewbox viewbox = new Viewbox() { Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(5, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Left };
-            TextBlock textBlock = new TextBlock() { Text = text, FontWeight = FontWeights.Bold };
+            TextBlock textBlock = new TextBlock() { Text = text, FontWeight = FontWeights.DemiBold, FontSize = 20};
             viewbox.Child = textBlock;
             return viewbox;
         }
@@ -96,7 +96,7 @@ namespace Zanimljiva_Geografija_Tim14
                 row = 0;
                 col++;
 
-                TextBlock name = new TextBlock() { Text = c.OfficialName, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                TextBlock name = new TextBlock() { Text = c.OfficialName, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = FontWeight.FromOpenTypeWeight(600)};
                 Viewbox nameViewbox = new Viewbox() { Child = name, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
                 countryGrid.Children.Add(nameViewbox);
                 Grid.SetRow(nameViewbox, row++);

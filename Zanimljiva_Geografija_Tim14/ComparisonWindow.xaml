@@ -14,7 +14,7 @@
             <!-- Countries will be added dynamically here -->
         </Grid>
         <Grid Grid.Row="1">
-            <Button Click="BackButton_Click" Content="Go back" Margin="10 0 10 10" Padding="5"></Button>
+            <Button MaxWidth="200" Click="BackButton_Click" Content="Go back" Margin="0 10" Padding="20 5" BorderBrush="#87d1ee" Background="#87d1ee" Style="{StaticResource btnRound}" FontWeight="DemiBold"></Button>
         </Grid>
     </Grid>
 </Window>
