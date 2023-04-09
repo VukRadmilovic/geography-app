@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Zanimljiva_Geografija_Tim14
 {
@@ -40,6 +41,18 @@ namespace Zanimljiva_Geografija_Tim14
             Hide();
             window.ShowDialog();
             Show();
+        }
+
+        private void button_map_Click(object sender, RoutedEventArgs e)
+        {
+            if(map_window.Visibility == Visibility.Visible)
+            {
+                map_window.Visibility = Visibility.Hidden;
+                button_map.Content = "See map";
+                return;
+            }
+            button_map.Content = "See info";
+            map_window.Visibility = Visibility.Visible;
         }
     }
 }
