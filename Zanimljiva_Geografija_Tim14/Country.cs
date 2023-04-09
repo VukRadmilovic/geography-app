@@ -71,17 +71,6 @@ namespace Zanimljiva_Geografija_Tim14
             return currencies;
         }
 
-        public List<string> GetAllCapitals()
-        {
-            List<string> currencies = new List<string>();
-            foreach (Dictionary<string, string> dict in CurrenciesDictionary.Values)
-            {
-                currencies.Add($"{dict["name"]} ({dict["symbol"]})");
-            }
-
-            return currencies;
-        }
-
         public Country()
         {
 
