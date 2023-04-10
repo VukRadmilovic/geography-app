@@ -102,15 +102,14 @@ namespace Zanimljiva_Geografija_Tim14
             }
             _compareCount++;
             if(_compareCount > 1)
-            {
                 compareButton.IsEnabled = true;
-            }
         }
 
         private void OnUncheck(object sender, RoutedEventArgs e)
         {
             _compareCount--;
-            compareButton.IsEnabled = false;
+            if(_compareCount < 2)
+                compareButton.IsEnabled = false;
         }
 
         private void Country_Table_Click(object sender, SelectedCellsChangedEventArgs e)

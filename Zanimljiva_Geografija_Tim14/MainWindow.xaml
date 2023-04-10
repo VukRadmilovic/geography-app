@@ -34,19 +34,22 @@
                 <ColumnDefinition>
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="searchComboBox" Grid.Column="0" Grid.Row="0" Margin="10 10" IsEditable="True" VerticalAlignment="Center"/>
+            <ComboBox x:Name="searchComboBox" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="10 10" IsEditable="True" VerticalAlignment="Center"/>
             <Viewbox Grid.Row="0" Grid.Column="1">
                 <Button x:Name="searchButton" Click="Button_Search_Click" Margin="0 10" Padding="20 5" BorderBrush="#87d1ee" Background="#87d1ee" Style="{StaticResource btnRound}" FontWeight="Bold">Search</Button>
             </Viewbox>
             <Viewbox Grid.Row="0" Grid.Column="2">
                 <Button x:Name="compareButton" Margin="0 10" Padding="20 5" BorderBrush="#87d1ee" Background="#87d1ee" Style="{StaticResource btnRound}" Click="Button_Click" FontWeight="Bold">Compare countries</Button>
             </Viewbox>
-            <DataGrid x:Name="countryTable" SelectedCellsChanged="Country_Table_Click" SelectionUnit="FullRow" SelectionMode="Single" Grid.Row="1" Grid.ColumnSpan="3" Margin="10 10" HorizontalAlignment="Left" AutoGenerateColumns="False">
+            <DataGrid x:Name="countryTable" SelectedCellsChanged="Country_Table_Click" 
+                      SelectionUnit="FullRow" SelectionMode="Single" Grid.Row="1" Grid.ColumnSpan="3" 
+                      Margin="10 10" HorizontalAlignment="Left" AutoGenerateColumns="False"
+                      CanUserAddRows="false" CanUserReorderColumns="False" FontSize="15">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=OfficialName}" Width="10*" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding Path=Capitals[0]}" Width="10*" Header="Capital"/>
-                    <DataGridTextColumn Binding="{Binding Path=Population}" Width="10*" Header="Population"/>
-                    <DataGridCheckBoxColumn Width="2*" Header="Compare">
+                    <DataGridTextColumn Binding="{Binding Path=OfficialName}" IsReadOnly="True" Width="11*" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Path=Capitals[0]}" IsReadOnly="True" Width="11*" Header="Capital"/>
+                    <DataGridTextColumn Binding="{Binding Path=Population, StringFormat='{}{0:0,0}'}" IsReadOnly="True" Width="11*" Header="Population"/>
+                    <DataGridCheckBoxColumn Width="3*" Header="Compare">
                         <DataGridCheckBoxColumn.CellStyle>
                             <Style>
                                 <EventSetter Event="CheckBox.Checked" Handler="OnChecked"/>
