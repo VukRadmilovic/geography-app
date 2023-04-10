@@ -34,6 +34,7 @@ namespace Zanimljiva_Geografija_Tim14
             try
             {
                 _countries = new ObservableCollection<Country>(await _service.GetCountriesAsync());
+                _countries = new ObservableCollection<Country>(_countries.OrderBy(country => country.OfficialName));
                 _selectedCountry = new ObservableCollection<Country>();
                 foreach (Country country in _countries)
                 {

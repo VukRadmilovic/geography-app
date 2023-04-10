@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -197,7 +198,7 @@ namespace Zanimljiva_Geografija_Tim14
                 Grid.SetColumn(continentsViewBox, col);
                 _scalableTextBlocks.Add(continents);
 
-                TextBlock population = new TextBlock() { Text = $"{c.Population:#,##0}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                TextBlock population = new TextBlock() { Text = c.Population.ToString("n0", CultureInfo.InvariantCulture), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
                 Viewbox populationViewBox = new Viewbox()
                 {
                     Child = population,
@@ -210,7 +211,7 @@ namespace Zanimljiva_Geografija_Tim14
                 Grid.SetColumn(populationViewBox, col);
                 _scalableTextBlocks.Add(population);
 
-                TextBlock lat = new TextBlock() { Text = $"{c.LatLng[0]:F}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                TextBlock lat = new TextBlock() { Text = c.LatLng[0].ToString("N2", CultureInfo.InvariantCulture), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
                 Viewbox latViewBox = new Viewbox()
                     { Child = lat, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
                 countryGrid.Children.Add(latViewBox);
@@ -218,7 +219,7 @@ namespace Zanimljiva_Geografija_Tim14
                 Grid.SetColumn(latViewBox, col);
                 _scalableTextBlocks.Add(lat);
 
-                TextBlock lng = new TextBlock() { Text = $"{c.LatLng[1]:F}", TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+                TextBlock lng = new TextBlock() { Text = c.LatLng[1].ToString("N2", CultureInfo.InvariantCulture), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
                 Viewbox lngViewBox = new Viewbox()
                     { Child = lng, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
                 countryGrid.Children.Add(lngViewBox);
