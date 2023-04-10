@@ -20,6 +20,7 @@ namespace Zanimljiva_Geografija_Tim14
         private readonly CountryService _service;
         private Country chosenCountry;
         private Collection<Country> _selectedCountry;
+        private List<String> _compareCountriesNames = new List<string>();
 
         public MainWindow()
         {
@@ -52,13 +53,20 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*List<Country> list = new List<Country>();
-            foreach(DataGridRow row in this.countryTable.)
-            Random random = new Random();
-            var window = new ComparisonWindow(new List<Country>(_countries.OrderBy(x => random.Next()).Take(3)));
+            /*Random random = new Random();
+            var window = new ComparisonWindow(new List<Country>(_countries.OrderBy(x => random.Next()).Take(3)));*/
+            List<Country> countries = new List<Country>();
+            foreach(Country country in _countries)
+            {
+                if (_compareCountriesNames.Contains(country.OfficialName))
+                {
+                    countries.Add(country);
+                }
+            }
+            var window = new ComparisonWindow(countries);
             Hide();
             window.ShowDialog();
-            Show();*/
+            Show();
         }
 
         private void button_map_Click(object sender, RoutedEventArgs e)
@@ -100,6 +108,11 @@ namespace Zanimljiva_Geografija_Tim14
             {
                 checkBox.IsChecked = false;
             }
+            else
+            {
+                var row = DataGridRow.GetRowContainingElement((sender as DataGridCell).Content as CheckBox);
+                _compareCountriesNames.Add((row.DataContext as Country).OfficialName);
+            }
             _compareCount++;
             if(_compareCount > 1)
                 compareButton.IsEnabled = true;
@@ -108,6 +121,7 @@ namespace Zanimljiva_Geografija_Tim14
         private void OnUncheck(object sender, RoutedEventArgs e)
         {
             _compareCount--;
+            _compareCountriesNames.Remove((DataGridRow.GetRowContainingElement((sender as DataGridCell).Content as CheckBox).DataContext as Country).OfficialName);
             if(_compareCount < 2)
                 compareButton.IsEnabled = false;
         }
