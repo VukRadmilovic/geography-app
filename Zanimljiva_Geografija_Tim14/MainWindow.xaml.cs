@@ -40,7 +40,7 @@ namespace Zanimljiva_Geografija_Tim14
                 }
                 chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
                 DataContext = chosenCountry;
-                compareButton.IsEnabled = true;
+                compareButton.IsEnabled = false;
                 this.countryTable.ItemsSource = _countries;
                 this.countryTable.SelectedIndex = 1;
             }
@@ -52,11 +52,13 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            /*List<Country> list = new List<Country>();
+            foreach(DataGridRow row in this.countryTable.)
             Random random = new Random();
             var window = new ComparisonWindow(new List<Country>(_countries.OrderBy(x => random.Next()).Take(3)));
             Hide();
             window.ShowDialog();
-            Show();
+            Show();*/
         }
 
         private void button_map_Click(object sender, RoutedEventArgs e)
@@ -99,11 +101,16 @@ namespace Zanimljiva_Geografija_Tim14
                 checkBox.IsChecked = false;
             }
             _compareCount++;
+            if(_compareCount > 1)
+            {
+                compareButton.IsEnabled = true;
+            }
         }
 
         private void OnUncheck(object sender, RoutedEventArgs e)
         {
             _compareCount--;
+            compareButton.IsEnabled = false;
         }
 
         private void Country_Table_Click(object sender, SelectedCellsChangedEventArgs e)
@@ -121,6 +128,7 @@ namespace Zanimljiva_Geografija_Tim14
                         if (selectedCountryName.Equals(country.OfficialName))
                         {
                             chosenCountry = country;
+                            DataContext = chosenCountry;
                             break;
                         }
                     }
