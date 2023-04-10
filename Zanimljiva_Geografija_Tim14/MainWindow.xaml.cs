@@ -19,7 +19,7 @@ namespace Zanimljiva_Geografija_Tim14
         private Collection<Country> _countries;
         private readonly CountryService _service;
         private Country chosenCountry;
-        private Collection<Country> _selectedCountry;
+        private Collection<Country> _searchedCountries;
         private List<string> _compareCountriesNames = new List<string>();
 
         public MainWindow()
@@ -35,7 +35,7 @@ namespace Zanimljiva_Geografija_Tim14
             {
                 _countries = new ObservableCollection<Country>(await _service.GetCountriesAsync());
                 _countries = new ObservableCollection<Country>(_countries.OrderBy(country => country.OfficialName));
-                _selectedCountry = new ObservableCollection<Country>();
+                _searchedCountries = new ObservableCollection<Country>();
                 foreach (Country country in _countries)
                 {
                     searchComboBox.Items.Add(country.OfficialName);
@@ -82,21 +82,21 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void Button_Search_Click(object sender, RoutedEventArgs e)
         {
-            if(!this.searchComboBox.Text.Equals(""))
+            _searchedCountries.Clear();
+            if(!searchComboBox.Text.Equals(""))
             {
-                foreach(Country country in _countries)
+                foreach(var country in _countries)
                 {
-                    if(country.OfficialName.Equals(this.searchComboBox.Text))
+                    if (country.OfficialName.IndexOf(searchComboBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        _selectedCountry.Clear();
-                        _selectedCountry.Add(country);
-                        this.countryTable.ItemsSource = _selectedCountry;
+                        _searchedCountries.Add(country);
                     }
                 }
+                countryTable.ItemsSource = _searchedCountries;
             }
             else
             {
-                this.countryTable.ItemsSource = _countries;
+                countryTable.ItemsSource = _countries;
             }
         }
 
@@ -147,9 +147,9 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void Country_Table_Click(object sender, SelectedCellsChangedEventArgs e)
         {
-            if(this.countryTable.SelectedCells.Count != 0)
+            if(countryTable.SelectedCells.Count != 0)
             {
-                DataGridCellInfo cellInfo = this.countryTable.SelectedCells[0];
+                DataGridCellInfo cellInfo = countryTable.SelectedCells[0];
                 var content = cellInfo.Column.GetCellContent(cellInfo.Item);
 
                 if (content != null)
