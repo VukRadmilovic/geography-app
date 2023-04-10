@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Country comparison" Height="650" Width="950" Icon="/earth_icon.png">
+        Title="Country comparison" Height="650" Width="950" Icon="/earth_icon.png" Background="#FFE6E6E6">
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

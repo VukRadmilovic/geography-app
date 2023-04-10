@@ -68,7 +68,7 @@ namespace Zanimljiva_Geografija_Tim14
             Show();
         }
 
-        private void button_map_Click(object sender, RoutedEventArgs e)
+        private void Button_map_Click(object sender, RoutedEventArgs e)
         {
             if (map_window.Visibility == Visibility.Visible)
             {
@@ -80,18 +80,19 @@ namespace Zanimljiva_Geografija_Tim14
             map_window.Visibility = Visibility.Visible;
         }
 
-        private void Button_Search_Click(object sender, RoutedEventArgs e)
+        private void Search()
         {
             _searchedCountries.Clear();
-            if(!searchComboBox.Text.Equals(""))
+            if (!searchComboBox.Text.Equals(""))
             {
-                foreach(var country in _countries)
+                foreach (var country in _countries)
                 {
                     if (country.OfficialName.IndexOf(searchComboBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         _searchedCountries.Add(country);
                     }
                 }
+
                 countryTable.ItemsSource = _searchedCountries;
             }
             else
@@ -166,6 +167,21 @@ namespace Zanimljiva_Geografija_Tim14
                     }
                 }
             }
+        }
+
+        private void searchComboBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            Search();
+        }
+
+        private void searchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Search();
+        }
+
+        private void searchComboBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            Search();
         }
     }
 }
