@@ -38,7 +38,7 @@ namespace Zanimljiva_Geografija_Tim14
                 {
                     this.searchComboBox.Items.Add(country.OfficialName);
                 }
-                //chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
+                chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
                 DataContext = chosenCountry;
                 compareButton.IsEnabled = true;
                 this.countryTable.ItemsSource = _countries;
@@ -94,21 +94,16 @@ namespace Zanimljiva_Geografija_Tim14
         private void OnChecked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (sender as DataGridCell).Content as CheckBox;
-            if (checkBox.IsChecked == true)
+            if (_compareCount == 3)
             {
-                if (_compareCount == 3)
-                {
-                    checkBox.IsChecked = false;
-                }
-                else
-                {
-                    _compareCount++;
-                }
+                checkBox.IsChecked = false;
             }
-            else
-            {
-                _compareCount--;
-            }
+            _compareCount++;
+        }
+
+        private void OnUncheck(object sender, RoutedEventArgs e)
+        {
+            _compareCount--;
         }
 
         private void Country_Table_Click(object sender, SelectedCellsChangedEventArgs e)

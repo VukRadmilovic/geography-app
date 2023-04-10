@@ -50,6 +50,7 @@
                         <DataGridCheckBoxColumn.CellStyle>
                             <Style>
                                 <EventSetter Event="CheckBox.Checked" Handler="OnChecked"/>
+                                <EventSetter Event="CheckBox.Unchecked" Handler="OnUncheck"/>
                             </Style>
                         </DataGridCheckBoxColumn.CellStyle>
                     </DataGridCheckBoxColumn>
