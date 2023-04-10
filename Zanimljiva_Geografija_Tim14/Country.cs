@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -43,6 +44,8 @@ namespace Zanimljiva_Geografija_Tim14
         [JsonProperty("languages")]
         public Dictionary<string, string> LanguagesDictionary { get; set; }
 
+        public bool IsChecked { get; set; }
+
         public string OfficialName
         {
             get => (string)NameDictionary["official"];
@@ -81,7 +84,7 @@ namespace Zanimljiva_Geografija_Tim14
 
         }
 
-        public Country(Dictionary<string, object> name, List<string> capitals, string region, string subRegion, int population, Dictionary<string, string> flag, Dictionary<string, string> coatOfArms, Dictionary<string, Dictionary<string, string>> currenciesDictionary, Dictionary<string, string> maps, List<string> continents, decimal[] latLng, Dictionary<string, string> languagesDictionary)
+        public Country(Dictionary<string, object> name, List<string> capitals, string region, string subRegion, int population, Dictionary<string, string> flag, Dictionary<string, string> coatOfArms, Dictionary<string, Dictionary<string, string>> currenciesDictionary, Dictionary<string, string> maps, List<string> continents, decimal[] latLng, Dictionary<string, string> languagesDictionary, bool isChecked)
         {
             NameDictionary = name;
             Capitals = capitals;
@@ -95,6 +98,7 @@ namespace Zanimljiva_Geografija_Tim14
             Continents = continents;
             LatLng = latLng;
             LanguagesDictionary = languagesDictionary;
+            IsChecked = isChecked;
         }
     }
 }

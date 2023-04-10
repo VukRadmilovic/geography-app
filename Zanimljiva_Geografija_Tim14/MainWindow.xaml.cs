@@ -20,7 +20,7 @@ namespace Zanimljiva_Geografija_Tim14
         private readonly CountryService _service;
         private Country chosenCountry;
         private Collection<Country> _selectedCountry;
-        private List<String> _compareCountriesNames = new List<string>();
+        private List<string> _compareCountriesNames = new List<string>();
 
         public MainWindow()
         {
@@ -38,13 +38,13 @@ namespace Zanimljiva_Geografija_Tim14
                 _selectedCountry = new ObservableCollection<Country>();
                 foreach (Country country in _countries)
                 {
-                    this.searchComboBox.Items.Add(country.OfficialName);
+                    searchComboBox.Items.Add(country.OfficialName);
                 }
-                chosenCountry = _countries[0]; //Ovo ce se menjati kada se bude implementirala logika za biranje drzave
+                chosenCountry = _countries[0];
                 DataContext = chosenCountry;
                 compareButton.IsEnabled = false;
-                this.countryTable.ItemsSource = _countries;
-                this.countryTable.SelectedIndex = 1;
+                countryTable.ItemsSource = _countries;
+                countryTable.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -54,8 +54,6 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*Random random = new Random();
-            var window = new ComparisonWindow(new List<Country>(_countries.OrderBy(x => random.Next()).Take(3)));*/
             List<Country> countries = new List<Country>();
             foreach(Country country in _countries)
             {
@@ -105,26 +103,46 @@ namespace Zanimljiva_Geografija_Tim14
         private void OnChecked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (sender as DataGridCell).Content as CheckBox;
-            if (_compareCount == 3)
+            var row = DataGridRow.GetRowContainingElement((sender as DataGridCell).Content as CheckBox);
+            if (row != null)
             {
-                checkBox.IsChecked = false;
+                var checkedCountry = row.DataContext as Country;
+                if (checkedCountry != null && checkedCountry.IsChecked)
+                    return;
+
+                if (_compareCount >= 3)
+                {
+                    checkBox.IsChecked = false;
+                    return;
+                }
+
+                if (checkBox?.IsChecked != null && checkBox.IsChecked.Value)
+                {
+                    _compareCount++;
+                    checkedCountry.IsChecked = true;
+                    _compareCountriesNames.Add(checkedCountry.OfficialName);
+                    if (_compareCount > 1)
+                        compareButton.IsEnabled = true;
+                }
             }
-            else
-            {
-                var row = DataGridRow.GetRowContainingElement((sender as DataGridCell).Content as CheckBox);
-                _compareCountriesNames.Add((row.DataContext as Country).OfficialName);
-            }
-            _compareCount++;
-            if(_compareCount > 1)
-                compareButton.IsEnabled = true;
         }
 
         private void OnUncheck(object sender, RoutedEventArgs e)
         {
-            _compareCount--;
-            _compareCountriesNames.Remove((DataGridRow.GetRowContainingElement((sender as DataGridCell).Content as CheckBox).DataContext as Country).OfficialName);
-            if(_compareCount < 2)
-                compareButton.IsEnabled = false;
+            var checkBox = (sender as DataGridCell).Content as CheckBox;
+            var uncheckedCountry = DataGridRow.GetRowContainingElement(checkBox)?.DataContext as Country;
+
+            if (uncheckedCountry == null || !uncheckedCountry.IsChecked)
+                return;
+
+            if (checkBox?.IsChecked != null && !checkBox.IsChecked.Value)
+            {
+                _compareCount--;
+                uncheckedCountry.IsChecked = false;
+                _compareCountriesNames.Remove(uncheckedCountry.OfficialName);
+                if (_compareCount < 2)
+                    compareButton.IsEnabled = false;
+            }
         }
 
         private void Country_Table_Click(object sender, SelectedCellsChangedEventArgs e)

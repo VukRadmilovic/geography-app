@@ -49,7 +49,7 @@
                     <DataGridTextColumn Binding="{Binding Path=OfficialName}" IsReadOnly="True" Width="11*" Header="Name"/>
                     <DataGridTextColumn Binding="{Binding Path=Capitals[0]}" IsReadOnly="True" Width="11*" Header="Capital"/>
                     <DataGridTextColumn Binding="{Binding Path=Population, StringFormat='{}{0:0,0}'}" IsReadOnly="True" Width="11*" Header="Population"/>
-                    <DataGridCheckBoxColumn Width="3*" Header="Compare">
+                    <DataGridCheckBoxColumn Binding="{Binding Path=IsChecked}" Width="3*" Header="Compare">
                         <DataGridCheckBoxColumn.CellStyle>
                             <Style>
                                 <EventSetter Event="CheckBox.Checked" Handler="OnChecked"/>
