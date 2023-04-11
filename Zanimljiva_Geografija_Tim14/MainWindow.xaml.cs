@@ -153,16 +153,22 @@ namespace Zanimljiva_Geografija_Tim14
             {
                 DataContext = (Country)content.DataContext;
             }
+            Country country = (Country)DataContext;
 
-            BitmapImage flagBitmap = new BitmapImage();
-            flagBitmap.BeginInit();
-            flagBitmap.UriSource = new Uri(((Country)DataContext).Flag["png"], UriKind.Absolute);
-            flagBitmap.EndInit();
-            flagImage.Source = flagBitmap;
 
+            if (country.Flag["png"].Length > 0)
+            {
+                BitmapImage flagBitmap = new BitmapImage();
+                flagBitmap.BeginInit();
+                flagBitmap.UriSource = new Uri(country.Flag["png"], UriKind.Absolute);
+                flagBitmap.EndInit();
+                flagImage.Source = flagBitmap;
+            }
+
+            if (country.CoatOfArms["png"].Length <= 0) return;
             BitmapImage coatOfArmsBitmap = new BitmapImage();
             coatOfArmsBitmap.BeginInit();
-            coatOfArmsBitmap.UriSource = new Uri(((Country)DataContext).CoatOfArms["png"], UriKind.Absolute);
+            coatOfArmsBitmap.UriSource = new Uri(country.CoatOfArms["png"], UriKind.Absolute);
             coatOfArmsBitmap.EndInit();
             coatOfArmsImage.Source = coatOfArmsBitmap;
         }
