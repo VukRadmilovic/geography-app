@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Zanimljiva_Geografija_Tim14
 {
@@ -15,12 +13,11 @@ namespace Zanimljiva_Geografija_Tim14
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int _compareCount = 0;
+        private int _compareCount;
         private Collection<Country> _countries;
         private readonly CountryService _service;
-        private Country chosenCountry;
         private Collection<Country> _searchedCountries;
-        private List<string> _compareCountriesNames = new List<string>();
+        private readonly List<string> _compareCountriesNames = new List<string>();
 
         public MainWindow()
         {
@@ -40,8 +37,7 @@ namespace Zanimljiva_Geografija_Tim14
                 {
                     searchComboBox.Items.Add(country.OfficialName);
                 }
-                chosenCountry = _countries[0];
-                DataContext = chosenCountry;
+                DataContext = _countries[0];
                 compareButton.IsEnabled = false;
                 countryTable.ItemsSource = _countries;
                 countryTable.SelectedIndex = 0;
@@ -103,69 +99,56 @@ namespace Zanimljiva_Geografija_Tim14
 
         private void OnChecked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = (sender as DataGridCell).Content as CheckBox;
-            var row = DataGridRow.GetRowContainingElement((sender as DataGridCell).Content as CheckBox);
-            if (row != null)
+            var checkBox = (sender as DataGridCell)?.Content as CheckBox;
+            var row = DataGridRow.GetRowContainingElement((sender as DataGridCell)?.Content as CheckBox);
+            if (row == null) return;
+            var checkedCountry = row.DataContext as Country;
+            if (checkedCountry != null && checkedCountry.IsChecked)
+                return;
+
+            if (_compareCount >= 3)
             {
-                var checkedCountry = row.DataContext as Country;
-                if (checkedCountry != null && checkedCountry.IsChecked)
-                    return;
-
-                if (_compareCount >= 3)
-                {
-                    checkBox.IsChecked = false;
-                    return;
-                }
-
-                if (checkBox?.IsChecked != null && checkBox.IsChecked.Value)
-                {
-                    _compareCount++;
-                    checkedCountry.IsChecked = true;
-                    _compareCountriesNames.Add(checkedCountry.OfficialName);
-                    if (_compareCount > 1)
-                        compareButton.IsEnabled = true;
-                }
+                if (checkBox != null) checkBox.IsChecked = false;
+                return;
             }
+
+            if (checkBox?.IsChecked == null || !checkBox.IsChecked.Value) return;
+            _compareCount++;
+            if (checkedCountry != null)
+            {
+                checkedCountry.IsChecked = true;
+                _compareCountriesNames.Add(checkedCountry.OfficialName);
+            }
+
+            if (_compareCount > 1)
+                compareButton.IsEnabled = true;
         }
 
         private void OnUncheck(object sender, RoutedEventArgs e)
         {
-            var checkBox = (sender as DataGridCell).Content as CheckBox;
+            var checkBox = (sender as DataGridCell)?.Content as CheckBox;
             var uncheckedCountry = DataGridRow.GetRowContainingElement(checkBox)?.DataContext as Country;
 
             if (uncheckedCountry == null || !uncheckedCountry.IsChecked)
                 return;
 
-            if (checkBox?.IsChecked != null && !checkBox.IsChecked.Value)
-            {
-                _compareCount--;
-                uncheckedCountry.IsChecked = false;
-                _compareCountriesNames.Remove(uncheckedCountry.OfficialName);
-                if (_compareCount < 2)
-                    compareButton.IsEnabled = false;
-            }
+            if (checkBox?.IsChecked == null || checkBox.IsChecked.Value) return;
+            _compareCount--;
+            uncheckedCountry.IsChecked = false;
+            _compareCountriesNames.Remove(uncheckedCountry.OfficialName);
+            if (_compareCount < 2)
+                compareButton.IsEnabled = false;
         }
 
         private void Country_Table_Click(object sender, SelectedCellsChangedEventArgs e)
         {
-            if(countryTable.SelectedCells.Count != 0)
-            {
-                DataGridCellInfo cellInfo = countryTable.SelectedCells[0];
-                var content = cellInfo.Column.GetCellContent(cellInfo.Item);
+            if (countryTable.SelectedCells.Count == 0) return;
+            DataGridCellInfo cellInfo = countryTable.SelectedCells[0];
+            var content = cellInfo.Column.GetCellContent(cellInfo.Item);
 
-                if (content != null)
-                {
-                    String selectedCountryName = ((Country)content.DataContext).OfficialName;
-                    foreach (Country country in _countries)
-                    {
-                        if (selectedCountryName.Equals(country.OfficialName))
-                        {
-                            chosenCountry = country;
-                            DataContext = chosenCountry;
-                            break;
-                        }
-                    }
-                }
+            if (content != null)
+            {
+                DataContext = (Country)content.DataContext;
             }
         }
 
