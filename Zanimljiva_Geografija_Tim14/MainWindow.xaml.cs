@@ -164,13 +164,23 @@ namespace Zanimljiva_Geografija_Tim14
                 flagBitmap.EndInit();
                 flagImage.Source = flagBitmap;
             }
+            else
+            {
+                flagImage.Source = null;
+            }
 
-            if (country.CoatOfArms["png"].Length <= 0) return;
-            BitmapImage coatOfArmsBitmap = new BitmapImage();
-            coatOfArmsBitmap.BeginInit();
-            coatOfArmsBitmap.UriSource = new Uri(country.CoatOfArms["png"], UriKind.Absolute);
-            coatOfArmsBitmap.EndInit();
-            coatOfArmsImage.Source = coatOfArmsBitmap;
+            if (country.CoatOfArms["png"].Length > 0)
+            {
+                BitmapImage coatOfArmsBitmap = new BitmapImage();
+                coatOfArmsBitmap.BeginInit();
+                coatOfArmsBitmap.UriSource = new Uri(country.CoatOfArms["png"], UriKind.Absolute);
+                coatOfArmsBitmap.EndInit();
+                coatOfArmsImage.Source = coatOfArmsBitmap;
+            }
+            else
+            {
+                coatOfArmsImage.Source = null;
+            }
         }
 
         private void searchComboBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

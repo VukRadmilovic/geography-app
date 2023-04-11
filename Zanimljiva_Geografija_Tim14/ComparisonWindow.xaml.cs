@@ -104,31 +104,47 @@ namespace Zanimljiva_Geografija_Tim14
                 Grid.SetColumn(nameViewbox, col);
                 _scalableTextBlocks.Add(name);
 
-                WrapPanel flagWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 0, 5, 2) };
-                var flagImage = new Image();
-                BitmapImage flagBitmap = new BitmapImage();
-                flagBitmap.BeginInit();
-                flagBitmap.UriSource = new Uri(c.Flag["png"], UriKind.Absolute);
-                flagBitmap.EndInit();
-                flagImage.Source = flagBitmap;
-                flagWrap.Children.Add(flagImage);
+                if (c.Flag["png"].Length > 0)
+                {
+                    WrapPanel flagWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 0, 5, 2) };
+                    var flagImage = new Image();
+                    BitmapImage flagBitmap = new BitmapImage();
+                    flagBitmap.BeginInit();
+                    flagBitmap.UriSource = new Uri(c.Flag["png"], UriKind.Absolute);
+                    flagBitmap.EndInit();
+                    flagImage.Source = flagBitmap;
+                    flagWrap.Children.Add(flagImage);
 
-                countryGrid.Children.Add(flagWrap);
-                Grid.SetRow(flagWrap, row++);
-                Grid.SetColumn(flagWrap, col);
+                    countryGrid.Children.Add(flagWrap);
+                    Grid.SetRow(flagWrap, row++);
+                    Grid.SetColumn(flagWrap, col);
+                }
+                else
+                {
+                    row++;
+                }
+                
 
-                WrapPanel coatOfArmsWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 2, 5, 0) };
-                var coatOfArmsImage = new Image();
-                BitmapImage coatOfArmsBitmap = new BitmapImage();
-                coatOfArmsBitmap.BeginInit();
-                coatOfArmsBitmap.UriSource = new Uri(c.CoatOfArms["png"], UriKind.Absolute);
-                coatOfArmsBitmap.EndInit();
-                coatOfArmsImage.Source = coatOfArmsBitmap;
-                coatOfArmsWrap.Children.Add(coatOfArmsImage);
+                if (c.CoatOfArms["png"].Length > 0)
+                {
+                    WrapPanel coatOfArmsWrap = new WrapPanel() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 2, 5, 0) };
+                    var coatOfArmsImage = new Image();
+                    BitmapImage coatOfArmsBitmap = new BitmapImage();
+                    coatOfArmsBitmap.BeginInit();
+                    coatOfArmsBitmap.UriSource = new Uri(c.CoatOfArms["png"], UriKind.Absolute);
+                    coatOfArmsBitmap.EndInit();
+                    coatOfArmsImage.Source = coatOfArmsBitmap;
+                    coatOfArmsWrap.Children.Add(coatOfArmsImage);
 
-                countryGrid.Children.Add(coatOfArmsWrap);
-                Grid.SetRow(coatOfArmsWrap, row++);
-                Grid.SetColumn(coatOfArmsWrap, col);
+                    countryGrid.Children.Add(coatOfArmsWrap);
+                    Grid.SetRow(coatOfArmsWrap, row++);
+                    Grid.SetColumn(coatOfArmsWrap, col);
+                }
+                else
+                {
+                    row++;
+                }
+                
 
                 TextBlock capitals = new TextBlock() { Text = string.Join(", ", c.Capitals), TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
                 Viewbox capitalsViewbox = new Viewbox() { Child = capitals, Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Margin = new Thickness(0, 0, 5, 0) };
