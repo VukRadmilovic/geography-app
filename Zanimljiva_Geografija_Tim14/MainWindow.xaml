@@ -190,14 +190,14 @@
                 <Viewbox Grid.Column="0" Margin="15 10" VerticalAlignment="Top">
                     <WrapPanel VerticalAlignment="Top" Orientation="Vertical">
                         <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 0 15" HorizontalAlignment="Center">Flag:</TextBlock>
-                        <Image Source="{Binding Flag[png], IsAsync=True}" MaxHeight="100" HorizontalAlignment="Center"></Image>
+                        <Image x:Name="flagImage" MaxHeight="100" HorizontalAlignment="Center"></Image>
                     </WrapPanel>
                 </Viewbox>
 
                     <Viewbox Grid.Column="1" Margin="15 10" VerticalAlignment="Top">
                         <WrapPanel VerticalAlignment="Top" Orientation="Vertical">
                             <TextBlock FontWeight="Bold" FontSize="20" Padding="0 0 0 15" HorizontalAlignment="Center">Coat of arms:</TextBlock>
-                            <Image Source="{Binding CoatOfArms[png], IsAsync=True}" MaxWidth="150"></Image>
+                            <Image x:Name="coatOfArmsImage" MaxWidth="150"></Image>
                         </WrapPanel>
                     </Viewbox>
                 </Grid>

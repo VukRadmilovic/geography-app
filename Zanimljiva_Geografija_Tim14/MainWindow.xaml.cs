@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Zanimljiva_Geografija_Tim14
 {
@@ -41,6 +42,8 @@ namespace Zanimljiva_Geografija_Tim14
                 compareButton.IsEnabled = false;
                 countryTable.ItemsSource = _countries;
                 countryTable.SelectedIndex = 0;
+                VirtualizingStackPanel.SetIsVirtualizing(countryTable, true);
+                VirtualizingStackPanel.SetVirtualizationMode(countryTable, VirtualizationMode.Recycling);
             }
             catch (Exception ex)
             {
@@ -150,6 +153,18 @@ namespace Zanimljiva_Geografija_Tim14
             {
                 DataContext = (Country)content.DataContext;
             }
+
+            BitmapImage flagBitmap = new BitmapImage();
+            flagBitmap.BeginInit();
+            flagBitmap.UriSource = new Uri(((Country)DataContext).Flag["png"], UriKind.Absolute);
+            flagBitmap.EndInit();
+            flagImage.Source = flagBitmap;
+
+            BitmapImage coatOfArmsBitmap = new BitmapImage();
+            coatOfArmsBitmap.BeginInit();
+            coatOfArmsBitmap.UriSource = new Uri(((Country)DataContext).CoatOfArms["png"], UriKind.Absolute);
+            coatOfArmsBitmap.EndInit();
+            coatOfArmsImage.Source = coatOfArmsBitmap;
         }
 
         private void searchComboBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
