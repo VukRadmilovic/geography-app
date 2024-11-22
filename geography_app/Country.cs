@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Zanimljiva_Geografija_Tim14
+namespace geography_app
 {
     public class Country
     {

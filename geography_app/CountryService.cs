@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Zanimljiva_Geografija_Tim14
+namespace geography_app
 {
     internal class CountryService
     {

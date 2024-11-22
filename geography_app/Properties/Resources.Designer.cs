@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zanimljiva_Geografija_Tim14.Properties
+namespace geography_app.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace Zanimljiva_Geografija_Tim14.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zanimljiva_Geografija_Tim14.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("geography_app.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

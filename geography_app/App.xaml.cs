@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Zanimljiva_Geografija_Tim14
+namespace geography_app
 {
     /// <summary>
     /// Interaction logic for App.xaml

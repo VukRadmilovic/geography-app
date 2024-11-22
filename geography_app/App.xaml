@@ -1,7 +1,7 @@
-﻿<Application x:Class="Zanimljiva_Geografija_Tim14.App"
+﻿<Application x:Class="geography_app.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Zanimljiva_Geografija_Tim14"
+             xmlns:local="clr-namespace:geography_app"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="RobotoFont" TargetType="{x:Type Control}">

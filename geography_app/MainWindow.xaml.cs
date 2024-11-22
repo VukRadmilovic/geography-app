@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Zanimljiva_Geografija_Tim14
+namespace geography_app
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

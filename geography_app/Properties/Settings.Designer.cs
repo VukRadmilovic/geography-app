@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zanimljiva_Geografija_Tim14.Properties
+namespace geography_app.Properties
 {
 
 

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows;
 
-namespace Zanimljiva_Geografija_Tim14
+namespace geography_app
 {
     public static class WebBrowserUtility {
 
